@@ -1,4 +1,4 @@
-Payment Gateway
+QUIQQER Developer
 ========
 
 
