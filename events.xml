@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<events>
+    <event on="onHeaderLoaded" fire="\QUI\Developer\EventHandler::onHeaderLoaded"/>
+    <event on="onAdminLoad" fire="\QUI\Developer\EventHandler::onAdminLoad"/>
+    <event on="onRequestOutput" fire="\QUI\Developer\EventHandler::onRequestOutput"/>
+    <event on="onRequest" fire="\QUI\Developer\EventHandler::onRequest"/>
+</events>
