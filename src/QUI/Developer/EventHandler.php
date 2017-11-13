@@ -26,6 +26,11 @@ class EventHandler
         }
 
         Debugger::enable();
+
+        Debugger::$logSeverity = E_NOTICE | E_WARNING;
+        Debugger::enable(Debugger::DEVELOPMENT, VAR_DIR.'/log');
+
+        Debugger::timer('page onHeaderLoaded');
     }
 
     /**
@@ -55,10 +60,7 @@ class EventHandler
      */
     public static function onRequestOutput(&$output)
     {
-        Debugger::$logSeverity = E_NOTICE | E_WARNING;
-        Debugger::enable(Debugger::DEVELOPMENT, VAR_DIR.'/log');
-
-
-        //Debugger::getBar()->render();
+        //Debugger::barDump([2, 4, 6, 8], 'even numbers up to ten');
+        Debugger::getBar()->addPanel(new Panels\QueryPanel());
     }
 }
