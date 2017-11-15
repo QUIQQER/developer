@@ -64,5 +64,6 @@ class EventHandler
 
         //Debugger::barDump([2, 4, 6, 8], 'even numbers up to ten');
         Debugger::getBar()->addPanel(new Panels\QueryPanel());
+        Debugger::getBar()->addPanel(new Panels\UserPanel());
     }
 }

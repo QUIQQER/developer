@@ -1,0 +1,23 @@
+<div style="width: 400px; height: 300px;">
+    <div class="quiqqer-debugger-login" data-qui="controls/users/Login"></div>
+    <script>
+        require([
+            'qui/QUI',
+            'controls/users/Login'
+        ], function (QUI, Login) {
+            new Login().inject(document.getElement('.quiqqer-debugger-login'));
+        });
+    </script>
+</div>
+<style>
+    .quiqqer-debugger-login .quiqqer-login-auth input {
+        padding: 8px !important;
+    }
+
+    .quiqqer-debugger-login .quiqqer-login-auth [type="submit"] {
+        border: 1px solid #dedede !important;
+        margin-top: 10px !important;
+        text-align: center !important;
+        width: 100% !important;
+    }
+</style>
