@@ -1,0 +1,23 @@
+<div style="height: 300px; overflow: auto; width: 600px; max-width: 100%;">
+
+    <h1 style="width: 100%;">Attributes</h1>
+    <table style="background: #FDF5CE; margin-bottom: 10px; width: 100%;">
+        {foreach $attributes as $key => $value}
+        <tr>
+            <td style="width: 50%;">{$key}</td>
+            <td>{$value|var_dump}</td>
+        </tr>
+        {/foreach}
+    </table>
+
+    <h1 style="width: 100%;">Extras</h1>
+    <table style="background: #FDF5CE;  width: 100%;">
+        {foreach $extras as $key => $value}
+        <tr>
+            <td style="width: 50%;">{$key}</td>
+            <td>{$value|var_dump}</td>
+        </tr>
+        {/foreach}
+    </table>
+
+</div>

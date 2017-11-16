@@ -58,6 +58,23 @@ class UserPanel implements Tracy\IBarPanel
             return $Engine->fetch(dirname(__FILE__).'/UserPanel.Login.html');
         }
 
-        return '';
+        $attributes = $User->getAttributes();
+        ksort($attributes);
+
+        $extras = $attributes['extra'];
+
+        if (!is_array($extras)) {
+            $extras = json_decode($extras, true);
+        }
+
+        unset($attributes['extra']);
+
+        $Engine->assign(array(
+            'User'       => $User,
+            'attributes' => $attributes,
+            'extras'     => $extras
+        ));
+
+        return $Engine->fetch(dirname(__FILE__).'/UserPanel.Data.html');
     }
 }
