@@ -60,8 +60,7 @@ class EventHandler
      */
     public static function onRequestOutput(&$output)
     {
-        Debugger::barDump(QUI\Developer\Panels\QueryCollector::getQueries(), 'DB Params');
-
+        //Debugger::barDump(QUI\Developer\Panels\QueryCollector::getQueries(), 'DB Params');
         //Debugger::barDump([2, 4, 6, 8], 'even numbers up to ten');
         Debugger::getBar()->addPanel(new Panels\QueryPanel());
         Debugger::getBar()->addPanel(new Panels\UserPanel());
