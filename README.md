@@ -1,6 +1,10 @@
 QUIQQER Developer
 ========
 
+This package is especially for developers. 
+If you want to develop your own QUIQQER package, quiqqer/developer will help you.
+
+Create packages / modules / plugins and get a lot of developer tools to support you in the development.
 
 Paketname:
 
@@ -10,12 +14,19 @@ Paketname:
 Features (Funktionen)
 --------
 
+- Tracy integration
+- Easy debug bar and quick access to information from the system 
+    - Tracy Debug Bar
+    - Special Tracy Debug Bar for QUIQQER 
+
+
 Installation
 ------------
 
-Der Paketname ist: quiqqer/developer
+The package name is: quiqqer/developer
 
-Mitwirken
+
+Contribute
 ----------
 
 - Issue Tracker: https://dev.quiqqer.com/quiqqer/developer/issues
@@ -26,7 +37,7 @@ Support
 -------
 
 
-Lizenz
+Licence
 -------
 
 MIT
