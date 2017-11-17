@@ -19,7 +19,8 @@
   "require": {
     "php": ">=5.3",
     "quiqqer\/quiqqer": "1.*|dev-master|dev-dev",
-    "tracy/tracy": "2.*"
+    "tracy/tracy": "2.*",
+    "netpromotion/profiler": "1.*"
   },
   "autoload": {
     "psr-4": {
