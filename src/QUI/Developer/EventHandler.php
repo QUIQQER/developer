@@ -6,6 +6,8 @@
 
 namespace QUI\Developer;
 
+use Netpromotion\Profiler\Adapter\TracyBarAdapter;
+use Netpromotion\Profiler\Profiler;
 use QUI;
 use Tracy\Debugger;
 
@@ -26,11 +28,10 @@ class EventHandler
         }
 
         Debugger::enable();
+        Profiler::enable();
 
         Debugger::$logSeverity = E_NOTICE | E_WARNING;
         Debugger::enable(Debugger::DEVELOPMENT, VAR_DIR.'/log');
-
-        Debugger::timer('page onHeaderLoaded');
     }
 
     /**
@@ -60,8 +61,10 @@ class EventHandler
      */
     public static function onRequestOutput(&$output)
     {
-        //Debugger::barDump(QUI\Developer\Panels\QueryCollector::getQueries(), 'DB Params');
-        //Debugger::barDump([2, 4, 6, 8], 'even numbers up to ten');
+        Debugger::getBar()->addPanel(
+            new TracyBarAdapter()
+        );
+
         Debugger::getBar()->addPanel(new Panels\QueryPanel());
         Debugger::getBar()->addPanel(new Panels\UserPanel());
     }
