@@ -1,11 +1,17 @@
 <div style="height: 300px; overflow: auto; width: 500px; max-width: 100%;">
     <table style="background: #FDF5CE">
+        <thead>
+        <tr>
+            <th>Query</th>
+            <th>Statements</th>
+            <th>Time</th>
+        </tr>
+        </thead>
         {foreach $queries as $query}
         <tr>
-            <td>Query</td>
             <td>{$query.query}</td>
-            <td>Statements</td>
             <td>{$query.prepare|var_dump}</td>
+            <td>{$query.duration}ms</td>
         </tr>
         {/foreach}
     </table>

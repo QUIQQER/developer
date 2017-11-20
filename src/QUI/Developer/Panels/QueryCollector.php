@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * This file contains QUI\Developer\Panels\QueryCollector
+ */
+
 namespace QUI\Developer\Panels;
 
 /**
@@ -15,11 +19,20 @@ class QueryCollector
     protected static $queries = array();
 
     /**
-     * @param string $query
+     * @param array $query
+     * @param float|bool $duration
      */
-    public static function add($query)
+    public static function add($query, $duration = false)
     {
-        self::$queries[] = $query;
+        $params = array();
+
+        if (is_array($query)) {
+            $params = $query;
+        }
+
+        $params['duration'] = $duration ? $duration : 0;
+
+        self::$queries[] = $params;
     }
 
     /**
@@ -39,10 +52,16 @@ class QueryCollector
     }
 
     /**
-     * @return int
+     * @return float
      */
     public static function getTotalElapsedTime()
     {
-        return 0;
+        $duration = 0;
+
+        foreach (self::$queries as $query) {
+            $duration = $duration + $query['duration'];
+        }
+
+        return $duration;
     }
 }

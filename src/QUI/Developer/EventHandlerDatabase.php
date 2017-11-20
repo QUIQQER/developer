@@ -7,6 +7,7 @@
 namespace QUI\Developer;
 
 use QUI;
+use Tracy\Debugger;
 
 /**
  * Class EventHandlerDatabase
@@ -21,15 +22,18 @@ class EventHandlerDatabase
      */
     public static function onDataBaseQuery($DataBase, $query)
     {
-        QUI\Developer\Panels\QueryCollector::add($query);
     }
 
     /**
      * @param $DataBase
      * @param $query
+     * @param float $startTime
+     * @param float $endTime
      */
-    public static function onDataBaseQueryEnd($DataBase, $query)
+    public static function onDataBaseQueryEnd($DataBase, $query, $startTime, $endTime)
     {
+        $diff = $endTime - $startTime;
 
+        QUI\Developer\Panels\QueryCollector::add($query, $diff);
     }
 }

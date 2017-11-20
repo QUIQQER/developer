@@ -32,7 +32,10 @@ class QueryPanel implements Tracy\IBarPanel
             $title = "$c queries";
         }
 
-        return "$title, ".number_format(QueryCollector::getTotalElapsedTime(), 1).'&nbsp;ms';
+        $time = QueryCollector::getTotalElapsedTime();
+        $time = round($time * 1000, 4);
+
+        return "$title, ".$time.'&nbsp;ms';
     }
 
     /**
@@ -58,10 +61,18 @@ class QueryPanel implements Tracy\IBarPanel
      */
     public function getPanel()
     {
-        $Engine = QUI::getTemplateManager()->getEngine();
+        $Engine  = QUI::getTemplateManager()->getEngine();
+        $queries = QueryCollector::getQueries();
+
+
+        foreach ($queries as $key => $query) {
+            $query['duration'] = round($query['duration'] * 1000, 4);
+            $queries[$key]     = $query;
+        }
+
 
         $Engine->assign(array(
-            'queries' => QueryCollector::getQueries()
+            'queries' => $queries
         ));
 
         return $Engine->fetch(dirname(__FILE__).'/QueryPanel.html');
