@@ -57,6 +57,17 @@ class EventHandler
     }
 
     /**
+     * event : on admin request
+     */
+    public static function onAdminRequest()
+    {
+        if (isset($_REQUEST['_tracy_bar'])) {
+            Debugger::getBar()->dispatchAssets();
+            exit;
+        }
+    }
+
+    /**
      * @param string $output
      */
     public static function onRequestOutput(&$output)

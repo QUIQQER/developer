@@ -4,6 +4,7 @@
     <event on="onAdminLoad" fire="\QUI\Developer\EventHandler::onAdminLoad"/>
     <event on="onRequestOutput" fire="\QUI\Developer\EventHandler::onRequestOutput"/>
     <event on="onRequest" fire="\QUI\Developer\EventHandler::onRequest"/>
+    <event on="onAdminRequest" fire="\QUI\Developer\EventHandler::onAdminRequest"/>
 
     <!-- DataBase Events -->
     <event on="onDataBaseQuery" fire="\QUI\Developer\EventHandlerDatabase::onDataBaseQuery"/>
