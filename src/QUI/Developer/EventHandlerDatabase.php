@@ -32,7 +32,7 @@ class EventHandlerDatabase
      */
     public static function onDataBaseQueryEnd($DataBase, $query, $startTime, $endTime)
     {
-        $diff = $endTime - $startTime;
+        $diff = floatval($endTime) - floatval($startTime);
 
         QUI\Developer\Panels\QueryCollector::add($query, $diff);
     }
