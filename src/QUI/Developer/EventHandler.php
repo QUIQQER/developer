@@ -27,10 +27,14 @@ class EventHandler
             define('QUIQQER_DEVELOPER', true);
         }
 
+        if (defined('QUIQQER_AJAX')) {
+            return;
+        }
+
         Debugger::enable();
         Profiler::enable();
 
-        Debugger::$logSeverity = E_NOTICE | E_WARNING;
+        Debugger::$logSeverity = E_ALL;
         Debugger::enable(Debugger::DEVELOPMENT, VAR_DIR.'/log');
     }
 
@@ -50,7 +54,7 @@ class EventHandler
      */
     public static function onRequest($Rewrite, $url)
     {
-        if (isset($_REQUEST['_tracy_bar'])) {
+        if (isset($_REQUEST['_tracy_bar']) || defined('QUIQQER_AJAX')) {
             Debugger::getBar()->dispatchAssets();
             exit;
         }
@@ -61,7 +65,7 @@ class EventHandler
      */
     public static function onAdminRequest()
     {
-        if (isset($_REQUEST['_tracy_bar'])) {
+        if (isset($_REQUEST['_tracy_bar']) || defined('QUIQQER_AJAX')) {
             Debugger::getBar()->dispatchAssets();
             exit;
         }
@@ -72,6 +76,10 @@ class EventHandler
      */
     public static function onRequestOutput(&$output)
     {
+        if (defined('QUIQQER_AJAX')) {
+            return;
+        }
+
         Debugger::getBar()->addPanel(
             new TracyBarAdapter()
         );
