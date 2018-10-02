@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiqqer>
+    <settings>
+
+        <config>
+
+            <section name="config">
+                <conf name="tracyDebugBar">
+                    <type><![CDATA[boolean]]></type>
+                    <defaultvalue>1</defaultvalue>
+                </conf>
+            </section>
+
+        </config>
+
+        <window>
+            <title>
+                <locale group="quiqqer/developer" var="settings.menu.title"/>
+            </title>
+
+            <params>
+                <icon>fa fa-cogs</icon>
+            </params>
+
+            <categories>
+                <category name="settings">
+                    <title>
+                        <locale group="quiqqer/developer" var="settings.category.config.title"/>
+                    </title>
+                    <settings title="config" name="config">
+                        <title>
+                            <locale group="quiqqer/developer" var="settings.config.title"/>
+                        </title>
+
+                        <input conf="config.tracyDebugBar" type="checkbox">
+                            <text>
+                                <locale group="quiqqer/developer" var="settings.tracyDebugBar.title"/>
+                            </text>
+                            <description>
+                                <locale group="quiqqer/developer" var="settings.tracyDebugBar.description"/>
+                            </description>
+                        </input>
+                    </settings>
+                </category>
+
+            </categories>
+        </window>
+
+    </settings>
+</quiqqer>

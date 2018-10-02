@@ -20,6 +20,8 @@ class EventHandler
 {
     /**
      * event: on header loaded
+     *
+     * @throws \QUI\Exception
      */
     public static function onHeaderLoaded()
     {
@@ -31,11 +33,15 @@ class EventHandler
             return;
         }
 
-        Debugger::enable();
         Profiler::enable();
 
-        Debugger::$logSeverity = E_ALL;
-        Debugger::enable(Debugger::DEVELOPMENT, VAR_DIR.'/log');
+        $Conf = QUI::getPackage('quiqqer/developer')->getConfig();
+
+        if ($Conf->getValue('config', 'tracyDebugBar')) {
+            Debugger::enable();
+            Debugger::$logSeverity = E_ALL;
+            Debugger::enable(Debugger::DEVELOPMENT, VAR_DIR.'/log');
+        }
     }
 
     /**
@@ -51,28 +57,42 @@ class EventHandler
     /**
      * @param $Rewrite
      * @param $url
+     *
+     * @throws \QUI\Exception
      */
     public static function onRequest($Rewrite, $url)
     {
-        if (isset($_REQUEST['_tracy_bar']) || defined('QUIQQER_AJAX')) {
-            Debugger::getBar()->dispatchAssets();
-            exit;
+        $Conf = QUI::getPackage('quiqqer/developer')->getConfig();
+
+        if ($Conf->getValue('config', 'tracyDebugBar')) {
+            if (isset($_REQUEST['_tracy_bar']) || defined('QUIQQER_AJAX')) {
+                Debugger::getBar()->dispatchAssets();
+                exit;
+            }
         }
     }
 
     /**
      * event : on admin request
+     *
+     * @throws \QUI\Exception
      */
     public static function onAdminRequest()
     {
-        if (isset($_REQUEST['_tracy_bar']) || defined('QUIQQER_AJAX')) {
-            Debugger::getBar()->dispatchAssets();
-            exit;
+        $Conf = QUI::getPackage('quiqqer/developer')->getConfig();
+
+        if ($Conf->getValue('config', 'tracyDebugBar')) {
+            if (isset($_REQUEST['_tracy_bar']) || defined('QUIQQER_AJAX')) {
+                Debugger::getBar()->dispatchAssets();
+                exit;
+            }
         }
     }
 
     /**
      * @param string $output
+     *
+     * @throws \QUI\Exception
      */
     public static function onRequestOutput(&$output)
     {
@@ -80,11 +100,15 @@ class EventHandler
             return;
         }
 
-        Debugger::getBar()->addPanel(
-            new TracyBarAdapter()
-        );
+        $Conf = QUI::getPackage('quiqqer/developer')->getConfig();
 
-        Debugger::getBar()->addPanel(new Panels\QueryPanel());
-        Debugger::getBar()->addPanel(new Panels\UserPanel());
+        if ($Conf->getValue('config', 'tracyDebugBar')) {
+            Debugger::getBar()->addPanel(
+                new TracyBarAdapter()
+            );
+
+            Debugger::getBar()->addPanel(new Panels\QueryPanel());
+            Debugger::getBar()->addPanel(new Panels\UserPanel());
+        }
     }
 }
